@@ -1,0 +1,70 @@
+---
+title: 'Timeseries and Forecasting:'
+author: "By Edna Mwenda"
+date: "Published on 1/7/2020"
+output:
+  html_document: default
+  pdf_document: default
+subtitle: ' The Introduction Part 1'
+---
+
+
+![Time-series-dummies-3-step-process](C:\Users\Mwenda\Desktop\DekutR\image4.png)
+
+
+### Definitions
+
+A time series is a set of observations *_x_t_*, each one being recorded at a specific time *t*. A time series is a set of statistics, usually collected at regular intervals of time. Time series data occur naturally in many application areas. These areas include(not exhaustively):
+
+  + economics - e.g., monthly data for unemployment, hospital admissions, etc.
+  
+  + finance - e.g., daily exchange rate, a share price, etc.
+  
+  + medicine - e.g., ECG brain wave activity every 3^-8^ secs etc.
+
+
+Stationary Time Series- A time series is stationary if the properties of the process such as the mean and variance are constant throughout time. For a stationary timeseries the following properties  must apply:
+
+
+The mean of the series should not be a function of time rather should be a constant. The variance of the series should not a be a function of time. This property is known as homoscedasticity. The covariance of the i th term and the (i + m) th term should not be a function of time. 
+
++	 If the autocorrelation dies out quickly the series should be considered stationary
+
+
+Nonstationarity- A time series is nonstationary if the properties of the process are not constant throughout time. 
+
+
+	+ 	If the autocorrelation dies out slowly this indicates that the process is non-stationary.
+	
++ 	Unit Root Nonstationarity-
++ 	Random Walk with Drift- 
+
+	White Noise- A time series is called a white noise if a sequence of independent and identically distributed random variables with finite mean and variance, usually WN(0,  ). White noise has covariance.
+	
+	Backward shift operator – a short hand for shift backward in the time series. 
+
+## Why is a stationarity of a timeseries important?
+
+This is because you cannot build a time series model with unstationary data. In cases where the stationary criterion are violated, the first requisite becomes to stationarize the time series and then try stochastic models to predict this time series. There are multiple ways of bringing this stationarity. Some of them are Detrending, Differencing etc. 
+  
+### Types of time series
+
+There are 2 types of a time series:
+
++ Continuous time time series are obtained when observations are recorded continuously over some time interval, e.g, _T_0_=[0,1].
+
++ A discrete-time time series is one in which the set _T_0_ of times at which observations are made is a discrete set, as is the case, for example, when observations are made at fixed time intervals.  
+
+
+
+
+
+
+
+
+
+
+
+
+This is going to be a series with three parts.  
+The first part will be the introduction which will cover what a time series is, components of a time series and various examples of time series in real life. The second part we will explore different data sets in R that are of the class timeseries. The third part we will be exploring real life timeseries datasets.

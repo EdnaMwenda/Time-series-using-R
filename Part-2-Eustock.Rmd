@@ -1,0 +1,120 @@
+---
+title: 'Timeseries and Forecasting:'
+author: "By Edna Mwenda"
+date: "Published on 1/7/2020"
+output:
+  html_document: default
+  pdf_document: default
+subtitle: ' The Introduction Part 2'
+---
+
+In part 1, we discussed the definition of some of the terms used in time series analysis. Here is the link to Part 1. 
+I'll however go through a few terms that are of importance before embarking on the coding. 
+
+## Read the data into R and Check the structure 
+
+
+
+Before starting the analysis, we'll first get familiar with the time series data available in R. Let's gets coding!!
+The packages to be used are;
+```{r}
+#Load the packages
+library(tidyverse)
+library(fBasics)
+library(stats)
+library(fGarch)
+library(tseries)
+```
+
+Loading the data into R. We are using the EuStockMarkets available in the R datasets. This dataset is the daily closing prices of major European Stock Indices from the year 1991 to 1998. 
+I  know this is decades ago,  however, we are only learning the basics before using raw data. 
+```{r}
+data("EuStockMarkets")
+glimpse(EuStockMarkets)
+class(EuStockMarkets)
+stock<-EuStockMarkets
+```
+ 
+## Convert to a time series and plot. 
+ 
+```{r}
+#CONVERT TO A TIMESERIES#
+tsstock<-ts(stock,start=c(1991),end=1998,frequency =260 )
+
+head(stock,n=7)
+start(stock)
+class(stock)
+end(stock)
+
+```
+
+The start and end of a time series specify the time the first and the last observation respectively. 
+
+```{r}
+ts.plot(stock, col = 1:4, xlab = "Year", ylab = "Index Value", main = "Major European Stock Indices, 1991-1998")
+```
+
+
+
+It appears that an additive model is not approproate for describing this time series since the seasonal fluctuations and the random fluctuations seems to increase with the level of the time series. 
+Thus, we may need to transform the time series in order to get a transformed time series that can be described using an additive model. We can for example, transform the time series by calculating the natural logarithm of the data. 
+
+## Transforming into Natural log
+
+```{r}
+log_st<-log(stock)
+plot.ts(log_st)
+```
+
+## Decompose the Time Series
+
+Decomposing the time series is important to deconstruct a time series into several components, each representing one of the underlying categories of patterns such as trend. 
+
+** Trend is the incresing or decreasing value in the series.
+**Seasonality is the repeating short-term cycle in the series.
+**  Noise is the random fluctuation in the series.
+
+The SMA() function in the TTR R package can be used to smooth time series data using a moving average. 
+```{r}
+decomptock<-decompose(stock)
+decomptock %>% head(n=5)
+```
+
+## Disclaimer!!!!
+The data is large hence I did not print the output  for this. 
+
+
+##  RELEVANT TESTS TO PERFORM WHEN CARRYING OUT TIME SERIES
+## Forecasting
+
+ADF( AUGMENTED DICKEY-FULLER) TEST
+
+This is one of the most popular statistical tests used to determine the presence of unit root in the series or rather if a series is stationary or not.
+
+The null hypothesis states that the series has a unit root 
+Vs
+The alternative hypothesis that states the series has no unit root. 
+
+
+The 
+
+
+##  Forecasting
+
+
+```{r}
+library(TTR)
+library(forecast)
+stockDAX<-SMA(stock[,1])
+plot.ts(stockDAX)
+```
+
+
+
+
+The forecast package contains the following functions that produce forecast objects; 
+meanf(), rwf(), croston(), stlf(), ses(), holt(), thetaf(), forecast(). 
+In this documentation, I will be using forecast(). It takes a time series object and returns objects of class forecast.  
+```{r}
+forecast(stock, h=10)
+```
